@@ -4,7 +4,7 @@ import { RecipeDetail } from "@/components/RecipeDetail";
 
 export const Route = createFileRoute("/recipes/$id")({
   head: ({ loaderData }) => {
-    const recipe = loaderData;
+    const recipe = loaderData as Recipe | undefined;
     if (!recipe) {
       return {
         meta: [
