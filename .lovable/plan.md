@@ -6,7 +6,7 @@ A recipe builder for gym-goers and healthy eaters, inspired by (and improving on
 
 - **Home (`/`)** — bold landing: hero, how it works, macro-focused value props, entry points to Browse and Fridge Matcher.
 - **Browse Recipes (`/recipes`)** — ~40 seeded recipes across Indian, Mediterranean, Mexican, Asian, and American cuisines. A prominent **World-Famous Chefs** collection adds click-worthy discovery through recognizable chef names and dishes. Filter chips: diet (meat / vegetarian / vegan), cuisine, min-protein slider, max-time, and chef recipes. Each card shows protein g, calories, cook time, diet tag, and chef attribution where applicable.
-- **Recipe Detail (`/recipes/$id`)** — full recipe: macros (protein/carbs/fat/calories), ingredients with quantities, numbered steps, tags.
+- **Recipe Detail (`/recipes/$id`)** — full recipe with a prominent **Macros panel** listing calories, protein, carbs, and fat per serving, plus per-ingredient macro contributions. Ingredients with quantities, numbered steps, tags.
 - **What's In My Fridge (`/fridge`)** — improved version of the prototype's core: grouped ingredient picker (proteins, veggies, pantry, spices, dairy), live match-ranked recipe list (matched by % of ingredients you have), one-tap "Surprise me" suggestions.
 - **Meal Plan (`/plan`)** — save recipes to a day-by-day weekly plan (stored in browser localStorage, no login). Shows daily + weekly protein/calorie totals so gym users can hit targets. Favorites can also be saved from any recipe card.
 
