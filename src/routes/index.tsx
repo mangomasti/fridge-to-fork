@@ -20,9 +20,16 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <div className="flex flex-col">
-      <section className="relative overflow-hidden bg-background px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground">
+      <section
+        className="relative overflow-hidden bg-background px-4 py-24 sm:px-6 lg:px-8"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(255,252,245,0.85), rgba(255,252,245,0.95)), url(${heroImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="relative mx-auto max-w-5xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-sm font-medium text-secondary-foreground backdrop-blur">
             <Flame className="h-4 w-4 text-primary" />
             Built for gym lovers and healthy eaters
           </div>
