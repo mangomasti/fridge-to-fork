@@ -18,7 +18,7 @@ A recipe builder for gym-goers and healthy eaters, inspired by (and improving on
 
 ## Design
 
-After plan approval, I'll generate 3 distinct visual directions (energetic fitness-editorial styles) for you to pick from, then build the chosen one faithfully — no generic AI look.
+After plan approval, I'll generate 3 distinct visual directions for you to pick from, all preserving the prototype's warm cream background, charcoal text, and spicy orange-red accents. The variations will explore more polished fitness-editorial layouts and typography without changing that familiar color identity.
 
 ## Technical notes
 
