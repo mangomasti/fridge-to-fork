@@ -25,7 +25,7 @@ export const Route = createFileRoute("/recipes/$id")({
       ],
     };
   },
-  loader: async ({ params }) => {
+  loader: async ({ params }): Promise<Recipe> => {
     const recipe = recipes.find((r) => r.id === params.id);
     if (!recipe) throw notFound();
     return recipe;
