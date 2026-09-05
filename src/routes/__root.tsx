@@ -126,8 +126,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        <footer className="border-t border-border bg-background py-8">
+          <div className="mx-auto max-w-7xl px-4 text-center text-sm text-muted-foreground sm:px-6 lg:px-8">
+            <p className="font-display text-lg text-foreground">Fuel Kitchen</p>
+            <p className="mt-2">High-protein recipes built for real kitchens and real macros.</p>
+            <p className="mt-4">© {new Date().getFullYear()} Fuel Kitchen. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
     </QueryClientProvider>
   );
 }
