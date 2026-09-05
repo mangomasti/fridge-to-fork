@@ -12,7 +12,7 @@ A recipe builder for gym-goers and healthy eaters, inspired by (and improving on
 
 ## Data
 
-- Built-in curated recipe dataset (~40 recipes) shipped in the app — instant, no backend needed. Each recipe carries full macros, ingredients, steps, cuisine, and diet tags.
+- Built-in curated recipe dataset (~40 recipes) shipped in the app — instant, no backend needed. Each recipe carries full macros (calories, protein, carbs, fat per serving and per ingredient), ingredients, steps, cuisine, and diet tags.
 - Chef content will use properly attributed public recipe references or original high-protein adaptations clearly labeled as “inspired by,” with a visible source link when a published recipe is referenced. The app will not copy protected editorial text or imply endorsement.
 - Fridge matcher ranks seeded recipes by ingredient coverage client-side.
 - Favorites + meal plan persist in localStorage. (If you later want accounts, sync across devices, or AI-generated recipes, we can enable Lovable Cloud + Lovable AI in a follow-up.)
