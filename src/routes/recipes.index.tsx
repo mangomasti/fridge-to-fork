@@ -5,7 +5,7 @@ import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
 
-export const Route = createFileRoute("/recipes")({
+export const Route = createFileRoute("/recipes/")({
   head: () => ({
     meta: [
       { title: "Browse Recipes — Fuel Kitchen" },
