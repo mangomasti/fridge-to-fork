@@ -15,7 +15,7 @@ describe("matcher", () => {
 
   it("ranks recipes by ingredient coverage", () => {
     const results = rankRecipesByFridge(["chicken breast", "yogurt", "tomatoes", "cream", "butter"]);
-    const top = results[0];
+    const top = results[0]!;
     expect(top.recipe.id).toBe("butter-chicken");
     expect(top.matchRatio).toBeGreaterThan(0.5);
   });
