@@ -9,7 +9,7 @@ interface RecipeCardProps {
   recipe: Recipe;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
-  matchRatio?: number;
+  matchRatio?: number | undefined;
 }
 
 export function RecipeCard({

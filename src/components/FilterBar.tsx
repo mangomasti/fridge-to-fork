@@ -106,7 +106,7 @@ export function FilterBar({
           </div>
           <Slider
             value={[minProtein]}
-            onValueChange={(v) => onMinProteinChange(v[0])}
+            onValueChange={(v) => onMinProteinChange(v[0] ?? 0)}
             min={0}
             max={60}
             step={5}
@@ -119,7 +119,7 @@ export function FilterBar({
           </div>
           <Slider
             value={[maxTime]}
-            onValueChange={(v) => onMaxTimeChange(v[0])}
+            onValueChange={(v) => onMaxTimeChange(v[0] ?? 120)}
             min={15}
             max={120}
             step={5}

@@ -60,14 +60,7 @@ function FridgePage() {
           onChange={setSelected}
         />
 
-        {selected.length > 0 && (
-          <SurpriseMe
-            selected={selected}
-            onRecipeClick={(id) => {
-              // handled by card link
-            }}
-          />
-        )}
+        {selected.length > 0 && <SurpriseMe selected={selected} />}
 
         <div className="mt-10">
           <h2 className="font-display text-2xl text-foreground">
@@ -86,17 +79,18 @@ function FridgePage() {
             </div>
           ) : (
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {(selected.length === 0 ? recipes.map((r) => ({ recipe: r, matchedIngredients: [], matchRatio: 0 })) : matches).map(
-                ({ recipe, matchRatio }) => (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    isFavorite={favorites.includes(recipe.id)}
-                    onToggleFavorite={toggle}
-                    matchRatio={selected.length > 0 ? matchRatio : undefined}
-                  />
-                )
-              )}
+              {(selected.length === 0
+                ? recipes.map((r) => ({ recipe: r, matchedIngredients: [], matchRatio: undefined }))
+                : matches
+              ).map(({ recipe, matchRatio }) => (
+                <RecipeCard
+                  key={recipe.id}
+                  recipe={recipe}
+                  isFavorite={favorites.includes(recipe.id)}
+                  onToggleFavorite={toggle}
+                  matchRatio={matchRatio}
+                />
+              ))}
             </div>
           )}
         </div>
