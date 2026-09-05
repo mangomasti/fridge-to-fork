@@ -5,6 +5,15 @@ import { RecipeDetail } from "@/components/RecipeDetail";
 export const Route = createFileRoute("/recipes/$id")({
   head: ({ loaderData }) => {
     const recipe = loaderData;
+    if (!recipe) {
+      return {
+        meta: [
+          { title: "Recipe — Fuel Kitchen" },
+          { name: "description", content: "High-protein recipe from Fuel Kitchen." },
+          { name: "robots", content: "noindex" },
+        ],
+      };
+    }
     return {
       meta: [
         { title: `${recipe.title} — Fuel Kitchen` },
@@ -26,5 +35,5 @@ export const Route = createFileRoute("/recipes/$id")({
 
 function RecipeDetailPage() {
   const recipe = Route.useLoaderData();
-  return <RecipeDetail recipe={recipe} />;
+  return <RecipeDetail recipe={recipe!} />;
 }

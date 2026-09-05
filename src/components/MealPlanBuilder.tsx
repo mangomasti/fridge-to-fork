@@ -61,10 +61,10 @@ export function MealPlanBuilder() {
 
             <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
-                <Flame className="h-3 w-3 text-primary" /> {daily[idx].protein}g
+                <Flame className="h-3 w-3 text-primary" /> {daily[idx]?.protein ?? 0}g
               </span>
               <span className="flex items-center gap-1">
-                <ChefHat className="h-3 w-3" /> {daily[idx].calories}
+                <ChefHat className="h-3 w-3" /> {daily[idx]?.calories ?? 0}
               </span>
             </div>
 
