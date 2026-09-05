@@ -34,6 +34,6 @@ export const Route = createFileRoute("/recipes/$id")({
 });
 
 function RecipeDetailPage() {
-  const recipe = Route.useLoaderData();
-  return <RecipeDetail recipe={recipe!} />;
+  const recipe = Route.useLoaderData() as Recipe;
+  return <RecipeDetail recipe={recipe} />;
 }
