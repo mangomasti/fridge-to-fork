@@ -49,9 +49,9 @@ export function rankRecipesByFridge(
   }
 
   const results: MatchResult[] = filtered.map((recipe) => {
-    const matched = recipe.ingredients
-      .map((ing) => ing.name)
-      .filter((name) => selected.some((sel) => ingredientMatch(sel, name)));
+    const names = recipe.ingredients.map((ing) => ing.name);
+    const matched = names.filter((name) => selected.some((sel) => ingredientMatch(sel, name)));
+    const missing = names.filter((name) => !selected.some((sel) => ingredientMatch(sel, name)));
 
     const uniqueMatched = Array.from(new Set(matched));
     const matchRatio = recipe.ingredients.length > 0
@@ -61,6 +61,7 @@ export function rankRecipesByFridge(
     return {
       recipe,
       matchedIngredients: uniqueMatched,
+      missingIngredients: Array.from(new Set(missing)),
       matchRatio,
     };
   });
