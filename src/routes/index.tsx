@@ -40,7 +40,7 @@ function HomePage() {
             Cook high-protein meals from whatever is in your fridge.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Browse 40+ macro-friendly recipes across Indian, Mediterranean, Mexican, Asian, and American cuisines. Match ingredients, save favorites, and plan your week.
+            Browse 75+ macro-friendly recipes across Indian, Mediterranean, Mexican, Asian, and American cuisines. Match ingredients, save favorites, and plan your week.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="gap-2">
