@@ -1,4 +1,5 @@
 import { extraRecipes } from "./recipes-extra";
+import { collectionRecipes } from "./recipes-collections";
 
 export type Diet = "meat" | "vegetarian" | "vegan";
 
@@ -9,7 +10,18 @@ export type Cuisine =
   | "Asian"
   | "American"
   | "Italian"
-  | "Middle Eastern";
+  | "Middle Eastern"
+  | "French"
+  | "Thai"
+  | "Japanese"
+  | "Argentinian";
+
+export type Collection =
+  | "fridge-rescue"
+  | "world-classics"
+  | "five-ingredient"
+  | "one-pan"
+  | "sauces";
 
 export interface Ingredient {
   name: string;
@@ -44,6 +56,9 @@ export interface Recipe {
   tags: string[];
   chef?: ChefAttribution;
   imageGradient: string;
+  collection?: Collection;
+  difficulty?: 1 | 2 | 3;
+  technique?: string;
 }
 
 export const cuisines: Cuisine[] = [
@@ -54,13 +69,40 @@ export const cuisines: Cuisine[] = [
   "American",
   "Italian",
   "Middle Eastern",
+  "French",
+  "Thai",
+  "Japanese",
+  "Argentinian",
 ];
+
+export const collections: Collection[] = [
+  "fridge-rescue",
+  "world-classics",
+  "five-ingredient",
+  "one-pan",
+  "sauces",
+];
+
+export const collectionLabels: Record<Collection, string> = {
+  "fridge-rescue": "Fridge Rescue",
+  "world-classics": "World Classics",
+  "five-ingredient": "5-Ingredient Wonders",
+  "one-pan": "One-Pan Meals",
+  sauces: "Sauces & Bases",
+};
+
+export const difficultyLabels: Record<1 | 2 | 3, string> = {
+  1: "Easy",
+  2: "Medium",
+  3: "Hard",
+};
 
 export const dietLabels: Record<Diet, string> = {
   meat: "Meat",
   vegetarian: "Vegetarian",
   vegan: "Vegan",
 };
+
 
 const g = (gradient: string) => gradient;
 
