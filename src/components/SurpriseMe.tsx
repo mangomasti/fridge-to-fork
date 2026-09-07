@@ -53,11 +53,16 @@ export function SurpriseMe({ selected, onAddIngredient }: SurpriseMeProps) {
                       <button
                         type="button"
                         onClick={() => {
-                          addItem(name);
-                          toast.success(`${name} added to your grocery list`);
+                          if (onAddIngredient) {
+                            onAddIngredient(name);
+                            toast.success(`${name} added to your fridge`);
+                          } else {
+                            addItem(name);
+                            toast.success(`${name} added to your grocery list`);
+                          }
                         }}
                         className="flex items-center gap-1 rounded-full border border-border px-2 py-1 text-xs text-foreground transition-colors hover:border-primary hover:text-primary"
-                        aria-label={`Add ${name} to grocery list`}
+                        aria-label={onAddIngredient ? `Add ${name} to my fridge` : `Add ${name} to grocery list`}
                       >
                         {name}
                         <PlusCircle className="h-3.5 w-3.5" />
