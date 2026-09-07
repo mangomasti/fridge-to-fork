@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart, PlusCircle } from "lucide-react";
+import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart, PlusCircle, Wind } from "lucide-react";
+import { isAirFryerFriendly } from "@/lib/airfryer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -89,7 +90,14 @@ export function RecipeCard({
           >
             {recipe.diet}
           </Badge>
+          {isAirFryerFriendly(recipe) && (
+            <Badge variant="outline" className="gap-1 border-primary/50 text-xs text-primary">
+              <Wind className="h-3 w-3" />
+              Air fryer
+            </Badge>
+          )}
         </div>
+
 
         <Link to="/recipes/$id" params={{ id: recipe.id }}>
           <h3 className="font-display text-lg leading-tight text-foreground transition-colors group-hover:text-primary">

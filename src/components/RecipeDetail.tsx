@@ -1,4 +1,4 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
 import { scaleAmount } from "@/lib/scale";
 import { useGroceryList } from "@/hooks/use-grocery";
+import { getAirFryerMethod } from "@/lib/airfryer";
 import { toast } from "sonner";
 
 
@@ -27,6 +28,7 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const isFav = favorites.includes(recipe.id);
   const [servings, setServings] = useState(recipe.servings);
   const factor = servings / recipe.servings;
+  const airFryer = getAirFryerMethod(recipe);
 
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8">
@@ -213,7 +215,35 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 ))}
               </ol>
             </div>
+
+            {airFryer && (
+              <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Wind className="h-5 w-5 text-primary" />
+                  <h2 className="font-display text-2xl text-foreground">Air fryer method</h2>
+                  <Badge variant="secondary">
+                    {airFryer.tempC}C / {airFryer.tempF}F
+                  </Badge>
+                  <Badge variant="secondary">about {airFryer.minutes} min</Badge>
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Swap the pan for the air fryer when cooking the {airFryer.focus}. Everything else
+                  in the recipe stays the same.
+                </p>
+                <ol className="mt-4 space-y-3">
+                  {airFryer.steps.map((step, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/40 text-xs font-bold text-primary">
+                        {idx + 1}
+                      </span>
+                      <p className="mt-0.5 text-foreground">{step}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
           </div>
+
 
           <aside className="space-y-6 lg:col-span-1">
             <MacroPanel recipe={recipe} servings={servings} />
