@@ -33,7 +33,7 @@ function HomePage() {
       >
         <div className="relative mx-auto max-w-5xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-sm font-medium text-secondary-foreground backdrop-blur">
-            <Flame className="h-4 w-4 text-primary" />
+            <Dumbbell className="h-4 w-4 text-primary" />
             Built for gym lovers and healthy eaters
           </div>
           <h1 className="font-display text-4xl font-normal leading-tight text-foreground sm:text-5xl lg:text-6xl">
@@ -76,7 +76,7 @@ function HomePage() {
             </div>
             <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Flame className="h-5 w-5" />
+                <Dumbbell className="h-5 w-5" />
               </div>
               <h3 className="font-display text-xl text-foreground">Macro-first recipes</h3>
               <p className="mt-2 text-muted-foreground">
