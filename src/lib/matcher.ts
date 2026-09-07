@@ -18,6 +18,7 @@ export function ingredientMatch(input: string, recipeIngredient: string): boolea
 export interface MatchResult {
   recipe: Recipe;
   matchedIngredients: string[];
+  missingIngredients: string[];
   matchRatio: number;
 }
 
