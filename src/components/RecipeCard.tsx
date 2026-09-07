@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart } from "lucide-react";
+import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -132,6 +132,32 @@ export function RecipeCard({
               />
             ))}
             <span className="ml-1">{difficultyLabels[recipe.difficulty]}</span>
+          </div>
+        )}
+
+        {missingIngredients && missingIngredients.length > 0 && (
+          <div className="mt-3 rounded-xl border border-dashed border-border bg-secondary/40 p-3">
+            <p className="text-xs font-semibold text-foreground">
+              You still need {missingIngredients.length} item{missingIngredients.length === 1 ? "" : "s"}
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-1.5">
+              {missingIngredients.map((name) => (
+                <li key={name}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      addItem(name);
+                      toast.success(`${name} added to your grocery list`);
+                    }}
+                    className="flex items-center gap-1 rounded-full border border-border bg-background px-2 py-1 text-xs text-foreground transition-colors hover:border-primary hover:text-primary"
+                    aria-label={`Add ${name} to grocery list`}
+                  >
+                    {name}
+                    <PlusCircle className="h-3.5 w-3.5" />
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 
