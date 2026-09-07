@@ -55,9 +55,51 @@ import imgTurkeyChili from "@/assets/recipes/turkey-chili.jpg";
 import imgTurkeyMeatballsMarinara from "@/assets/recipes/turkey-meatballs-marinara.jpg";
 import imgVeganBurritoBowl from "@/assets/recipes/vegan-burrito-bowl.jpg";
 import imgVegetablePaella from "@/assets/recipes/vegetable-paella.jpg";
+import imgEggFriedRice from "@/assets/recipes/egg-fried-rice.jpg";
+import imgGarlicButterPasta from "@/assets/recipes/garlic-butter-pasta.jpg";
+import imgVeggieFrittata from "@/assets/recipes/veggie-frittata.jpg";
+import imgChickpeaSkillet from "@/assets/recipes/chickpea-skillet.jpg";
+import imgCarbonara from "@/assets/recipes/carbonara.jpg";
+import imgShakshukaSimplified from "@/assets/recipes/shakshuka-simplified.jpg";
+import imgChickenTikka from "@/assets/recipes/chicken-tikka.jpg";
+import imgPadThai from "@/assets/recipes/pad-thai.jpg";
+import imgCoqAuVin from "@/assets/recipes/coq-au-vin.jpg";
+import imgMisoSoup from "@/assets/recipes/miso-soup.jpg";
+import imgTomatoConfitPasta from "@/assets/recipes/tomato-confit-pasta.jpg";
+import imgHoneyGarlicSalmon from "@/assets/recipes/honey-garlic-salmon.jpg";
+import imgCapreseToast from "@/assets/recipes/caprese-toast.jpg";
+import imgRoastedChickpeaBowl from "@/assets/recipes/roasted-chickpea-bowl.jpg";
+import imgSheetPanChickenVeg from "@/assets/recipes/sheet-pan-chicken-veg.jpg";
+import imgSkilletGnocchi from "@/assets/recipes/skillet-gnocchi.jpg";
+import imgBakedFetaPasta from "@/assets/recipes/baked-feta-pasta.jpg";
+import imgTomatoSauce from "@/assets/recipes/tomato-sauce.jpg";
+import imgVinaigrette from "@/assets/recipes/vinaigrette.jpg";
+import imgGarlicAioli from "@/assets/recipes/garlic-aioli.jpg";
+import imgChimichurri from "@/assets/recipes/chimichurri.jpg";
 
 export const recipeImages: Record<string, string> = {
-  "bbq-pulled-chicken": imgBbqPulledChicken,
+  "egg-fried-rice": imgEggFriedRice,
+  "garlic-butter-pasta": imgGarlicButterPasta,
+  "veggie-frittata": imgVeggieFrittata,
+  "chickpea-skillet": imgChickpeaSkillet,
+  "carbonara": imgCarbonara,
+  "shakshuka-simplified": imgShakshukaSimplified,
+  "chicken-tikka": imgChickenTikka,
+  "pad-thai": imgPadThai,
+  "coq-au-vin": imgCoqAuVin,
+  "miso-soup": imgMisoSoup,
+  "tomato-confit-pasta": imgTomatoConfitPasta,
+  "honey-garlic-salmon": imgHoneyGarlicSalmon,
+  "caprese-toast": imgCapreseToast,
+  "roasted-chickpea-bowl": imgRoastedChickpeaBowl,
+  "sheet-pan-chicken-veg": imgSheetPanChickenVeg,
+  "skillet-gnocchi": imgSkilletGnocchi,
+  "baked-feta-pasta": imgBakedFetaPasta,
+  "tomato-sauce": imgTomatoSauce,
+  "vinaigrette": imgVinaigrette,
+  "garlic-aioli": imgGarlicAioli,
+  "chimichurri": imgChimichurri,
+
   "beef-and-broccoli": imgBeefAndBroccoli,
   "blackened-tilapia": imgBlackenedTilapia,
   "buffalo-chicken-lettuce-wraps": imgBuffaloChickenLettuceWraps,
