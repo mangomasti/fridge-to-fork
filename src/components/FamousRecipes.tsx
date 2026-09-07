@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, ExternalLink, Flame } from "lucide-react";
+import { Clock, Dumbbell, ExternalLink } from "lucide-react";
 import { recipes } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
 
@@ -53,8 +53,8 @@ export function FamousRecipes({ limit = 6 }: { limit?: number }) {
             </div>
             <div className="flex shrink-0 items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1 font-semibold text-foreground">
-                <Flame className="h-4 w-4 text-primary" />
-                {recipe.protein}g
+                <Dumbbell className="h-4 w-4 text-primary" />
+                {recipe.protein}g protein
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
