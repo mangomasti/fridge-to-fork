@@ -53,6 +53,8 @@ export function FilterBar({
   onMeatChange,
   collection,
   onCollectionChange,
+  airFryerOnly,
+  onAirFryerOnlyChange,
 }: FilterBarProps) {
   return (
     <div className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
@@ -163,6 +165,20 @@ export function FilterBar({
           <ChefHat className="h-4 w-4" />
           Chef inspired
         </button>
+
+        <button
+          onClick={() => onAirFryerOnlyChange(!airFryerOnly)}
+          className={cn(
+            "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+            airFryerOnly
+              ? "bg-primary text-primary-foreground"
+              : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+          )}
+        >
+          <Wind className="h-4 w-4" />
+          Air fryer friendly
+        </button>
+
       </div>
 
       <div className="grid gap-6 border-t border-border pt-4 sm:grid-cols-2">

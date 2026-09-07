@@ -5,6 +5,7 @@ import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
 import { getMeatType } from "@/lib/meat";
+import { isAirFryerFriendly } from "@/lib/airfryer";
 
 
 export const Route = createFileRoute("/recipes/")({
