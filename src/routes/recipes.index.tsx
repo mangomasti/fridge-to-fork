@@ -9,9 +9,9 @@ import { getMeatType } from "@/lib/meat";
 
 
 export const Route = createFileRoute("/recipes/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    collection: typeof search['collection'] === "string" ? (search['collection'] as string) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { collection?: string } =>
+    typeof search['collection'] === "string" ? { collection: search['collection'] } : {},
+
   head: () => ({
     meta: [
       { title: "Browse Recipes — Fuel Kitchen" },
