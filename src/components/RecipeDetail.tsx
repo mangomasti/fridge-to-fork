@@ -106,6 +106,22 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 <Utensils className="h-4 w-4" />
                 {recipe.servings} serving{recipe.servings === 1 ? "" : "s"}
               </span>
+              {recipe.difficulty && (
+                <span className="flex items-center gap-1">
+                  {[1, 2, 3].map((n) => (
+                    <Star
+                      key={n}
+                      className={cn(
+                        "h-4 w-4",
+                        n <= (recipe.difficulty ?? 0)
+                          ? "fill-primary text-primary"
+                          : "text-muted-foreground/40"
+                      )}
+                    />
+                  ))}
+                  <span className="ml-1">{difficultyLabels[recipe.difficulty]}</span>
+                </span>
+              )}
             </div>
 
             <div className="mt-8">
@@ -122,6 +138,17 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 ))}
               </ul>
             </div>
+
+            {recipe.technique && (
+              <div className="mt-6 flex gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-4">
+                <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <div>
+                  <p className="font-display text-lg text-foreground">Chef technique</p>
+                  <p className="mt-1 text-sm text-foreground/80">{recipe.technique}</p>
+                </div>
+              </div>
+            )}
+
 
             <div className="mt-8">
               <h2 className="font-display text-2xl text-foreground">Instructions</h2>
