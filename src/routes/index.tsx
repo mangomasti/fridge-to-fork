@@ -1,8 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChefHat, Flame, Refrigerator, Search } from "lucide-react";
+import { ArrowRight, ChefHat, Dumbbell, Refrigerator, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero.jpg";
 import { FamousRecipes } from "@/components/FamousRecipes";
+import { collections, collectionLabels } from "@/data/recipes";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -100,6 +102,30 @@ function HomePage() {
         </div>
       </section>
 
+      <section className="px-4 pt-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-display text-2xl text-foreground">Collections</h2>
+          <p className="mt-1 text-muted-foreground">
+            Jump straight to the kind of cooking you're in the mood for.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {collections.map((c) => (
+              <Link
+                key={c}
+                to="/recipes"
+                search={{ collection: c }}
+                className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-primary"
+              >
+                <p className="font-display text-lg text-foreground">{collectionLabels[c]}</p>
+                <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                  View <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
@@ -116,6 +142,7 @@ function HomePage() {
           </div>
           <FamousRecipes limit={5} />
         </div>
+
         <div className="mx-auto mt-10 max-w-4xl text-center">
           <p className="text-muted-foreground">
             Dishes inspired by world-famous chefs — reimagined with high-protein macros, plus chicken, turkey, beef, lamb, pork and seafood options.
