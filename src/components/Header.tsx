@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ChefHat, Heart, Refrigerator, Search, Menu, X } from "lucide-react";
+import { ChefHat, Heart, Refrigerator, Search, Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,7 +8,8 @@ const nav = [
   { to: "/recipes", label: "Browse", icon: Search },
   { to: "/fridge", label: "My Fridge", icon: Refrigerator },
   { to: "/plan", label: "Meal Plan", icon: ChefHat },
-  { to: "/favorites", label: "Favorites", icon: Heart },
+  { to: "/favorites", label: "Saved", icon: Heart },
+  { to: "/grocery", label: "Grocery List", icon: ShoppingCart },
 ];
 
 export function Header() {
@@ -23,7 +24,7 @@ export function Header() {
             <ChefHat className="h-5 w-5" />
           </span>
           <span className="font-display text-xl tracking-tight text-foreground">
-            Fuel Kitchen
+            Fridge To Fork
           </span>
         </Link>
 

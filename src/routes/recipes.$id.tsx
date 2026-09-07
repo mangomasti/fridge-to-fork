@@ -8,17 +8,17 @@ export const Route = createFileRoute("/recipes/$id")({
     if (!recipe) {
       return {
         meta: [
-          { title: "Recipe — Fuel Kitchen" },
-          { name: "description", content: "High-protein recipe from Fuel Kitchen." },
+          { title: "Recipe — Fridge To Fork" },
+          { name: "description", content: "High-protein recipe from Fridge To Fork." },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     return {
       meta: [
-        { title: `${recipe.title} — Fuel Kitchen` },
+        { title: `${recipe.title} — Fridge To Fork` },
         { name: "description", content: `High-protein ${recipe.cuisine} recipe with ${recipe.protein}g protein and ${recipe.calories} calories per serving.` },
-        { property: "og:title", content: `${recipe.title} — Fuel Kitchen` },
+        { property: "og:title", content: `${recipe.title} — Fridge To Fork` },
         { property: "og:description", content: `High-protein ${recipe.cuisine} recipe with ${recipe.protein}g protein and ${recipe.calories} calories per serving.` },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },

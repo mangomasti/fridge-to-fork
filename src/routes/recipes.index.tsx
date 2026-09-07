@@ -14,9 +14,9 @@ export const Route = createFileRoute("/recipes/")({
 
   head: () => ({
     meta: [
-      { title: "Browse Recipes — Fuel Kitchen" },
+      { title: "Browse Recipes — Fridge To Fork" },
       { name: "description", content: "Browse 75+ high-protein recipes. Filter by collection, cuisine, diet, protein, cook time, and chef-inspired dishes." },
-      { property: "og:title", content: "Browse Recipes — Fuel Kitchen" },
+      { property: "og:title", content: "Browse Recipes — Fridge To Fork" },
       { property: "og:description", content: "Browse 75+ high-protein recipes. Filter by collection, cuisine, diet, protein, cook time, and chef-inspired dishes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
