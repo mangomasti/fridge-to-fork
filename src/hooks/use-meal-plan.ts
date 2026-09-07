@@ -7,6 +7,7 @@ export const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 export interface MealSlot {
   recipeId: string;
   title: string;
+  servings: number;
   protein: number;
   calories: number;
   carbs: number;
