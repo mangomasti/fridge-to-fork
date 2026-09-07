@@ -59,8 +59,9 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 </Badge>
               )}
               <Badge variant="secondary">{recipe.cuisine}</Badge>
-
+              <Badge
                 variant="outline"
+
                 className={cn(
                   "capitalize",
                   recipe.diet === "vegan" && "border-green-600 text-green-700",
