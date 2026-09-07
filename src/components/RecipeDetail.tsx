@@ -1,4 +1,4 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind, Check } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,8 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const { addRecipe, addItem } = useGroceryList();
   const isFav = favorites.includes(recipe.id);
   const [servings, setServings] = useState(recipe.servings);
+  const [planServings, setPlanServings] = useState<number>(recipe.servings);
+  const [savedDay, setSavedDay] = useState<Day | null>(null);
   const factor = servings / recipe.servings;
   const airFryer = getAirFryerMethod(recipe);
 
