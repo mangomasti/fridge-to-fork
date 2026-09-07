@@ -39,6 +39,8 @@ function FridgePage() {
   );
 
   const clear = () => setSelected([]);
+  const addIngredient = (name: string) =>
+    setSelected((prev) => (prev.includes(name) ? prev : [...prev, name]));
 
   if (!hydrated) return null;
 
