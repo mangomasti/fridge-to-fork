@@ -59,6 +59,12 @@ function HomePage() {
         </div>
       </section>
 
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <FamousRecipes limit={5} />
+        </div>
+      </section>
+
       <section className="bg-secondary px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -127,7 +133,7 @@ function HomePage() {
       </section>
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
+        <div className="mx-auto max-w-6xl">
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h2 className="font-display text-2xl text-foreground">What's in your fridge?</h2>
             <p className="mt-2 text-muted-foreground">
@@ -140,7 +146,6 @@ function HomePage() {
               </Link>
             </Button>
           </div>
-          <FamousRecipes limit={5} />
         </div>
 
         <div className="mx-auto mt-10 max-w-4xl text-center">
