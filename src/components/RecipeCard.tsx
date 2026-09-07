@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Dumbbell, ChefHat, Heart, Star } from "lucide-react";
+import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { difficultyLabels, type Recipe } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
+import { useGroceryList } from "@/hooks/use-grocery";
+import { toast } from "sonner";
 
 
 interface RecipeCardProps {
@@ -20,6 +22,7 @@ export function RecipeCard({
   onToggleFavorite,
   matchRatio,
 }: RecipeCardProps) {
+  const { addRecipe } = useGroceryList();
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
       <Link to="/recipes/$id" params={{ id: recipe.id }} className="relative block">
@@ -56,7 +59,7 @@ export function RecipeCard({
               e.preventDefault();
               onToggleFavorite(recipe.id);
             }}
-            aria-label={isFavorite ? "Remove favorite" : "Add favorite"}
+            aria-label={isFavorite ? "Remove from saved" : "Save this dish"}
           >
             <Heart
               className={cn(
@@ -129,6 +132,21 @@ export function RecipeCard({
             <span className="ml-1">{difficultyLabels[recipe.difficulty]}</span>
           </div>
         )}
+
+        <div className="mt-3">
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full gap-2"
+            onClick={() => {
+              addRecipe(recipe);
+              toast.success(`Ingredients for ${recipe.title} added to your grocery list`);
+            }}
+          >
+            <ShoppingCart className="h-4 w-4" />
+            Add to grocery list
+          </Button>
+        </div>
       </div>
 
     </div>
