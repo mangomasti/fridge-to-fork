@@ -1,4 +1,4 @@
-import { Flame, ChefHat, Wheat, Droplet } from "lucide-react";
+import { Dumbbell, ChefHat, Wheat, Droplet } from "lucide-react";
 import type { Recipe } from "@/data/recipes";
 
 interface MacroPanelProps {
@@ -15,7 +15,7 @@ export function MacroPanel({ recipe }: MacroPanelProps) {
         <div className="rounded-xl bg-secondary p-3 text-center">
           <p className="text-2xl font-bold text-foreground">{recipe.protein}g</p>
           <p className="flex items-center justify-center gap-1 text-xs text-muted-foreground">
-            <Flame className="h-3 w-3 text-primary" /> Protein
+            <Dumbbell className="h-3 w-3 text-primary" /> Protein
           </p>
         </div>
         <div className="rounded-xl bg-secondary p-3 text-center">

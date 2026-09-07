@@ -1,19 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { recipes, cuisines, dietLabels } from "@/data/recipes";
+import { recipes, cuisines, collectionLabels, type Collection } from "@/data/recipes";
 import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
 import { FamousRecipes } from "@/components/FamousRecipes";
 import { getMeatType } from "@/lib/meat";
 
+
 export const Route = createFileRoute("/recipes/")({
+  validateSearch: (search: Record<string, unknown>): { collection?: string } =>
+    typeof search['collection'] === "string" ? { collection: search['collection'] } : {},
+
   head: () => ({
     meta: [
       { title: "Browse Recipes — Fuel Kitchen" },
-      { name: "description", content: "Browse 40+ high-protein recipes. Filter by cuisine, diet, protein, cook time, and chef-inspired dishes." },
+      { name: "description", content: "Browse 75+ high-protein recipes. Filter by collection, cuisine, diet, protein, cook time, and chef-inspired dishes." },
       { property: "og:title", content: "Browse Recipes — Fuel Kitchen" },
-      { property: "og:description", content: "Browse 40+ high-protein recipes. Filter by cuisine, diet, protein, cook time, and chef-inspired dishes." },
+      { property: "og:description", content: "Browse 75+ high-protein recipes. Filter by collection, cuisine, diet, protein, cook time, and chef-inspired dishes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -22,6 +26,7 @@ export const Route = createFileRoute("/recipes/")({
 });
 
 function RecipesPage() {
+  const { collection: collectionParam } = Route.useSearch();
   const { favorites, toggle, hydrated } = useFavorites();
   const [diet, setDiet] = useState<string>("all");
   const [cuisine, setCuisine] = useState<string>("all");
@@ -30,11 +35,13 @@ function RecipesPage() {
   const [chefOnly, setChefOnly] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [meat, setMeat] = useState<string>("all");
+  const [collection, setCollection] = useState<string>(collectionParam ?? "all");
 
   const filtered = useMemo(() => {
     return recipes.filter((r) => {
       if (diet !== "all" && r.diet !== diet) return false;
       if (cuisine !== "all" && r.cuisine !== cuisine) return false;
+      if (collection !== "all" && r.collection !== collection) return false;
       if (meat !== "all" && getMeatType(r) !== meat) return false;
       if (r.protein < minProtein) return false;
       if (r.timeMinutes > maxTime) return false;
@@ -49,15 +56,20 @@ function RecipesPage() {
       }
       return true;
     });
-  }, [diet, cuisine, minProtein, maxTime, chefOnly, search, meat]);
+  }, [diet, cuisine, minProtein, maxTime, chefOnly, search, meat, collection]);
 
   if (!hydrated) return null;
+
+  const heading =
+    collection !== "all" && collection in collectionLabels
+      ? collectionLabels[collection as Collection]
+      : "Browse recipes";
 
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
-          <h1 className="font-display text-3xl text-foreground sm:text-4xl">Browse recipes</h1>
+          <h1 className="font-display text-3xl text-foreground sm:text-4xl">{heading}</h1>
           <p className="mt-2 text-muted-foreground">
             {filtered.length} macro-friendly recipes across {cuisines.length} cuisines.
           </p>
@@ -78,7 +90,10 @@ function RecipesPage() {
           onSearchChange={setSearch}
           meat={meat}
           onMeatChange={setMeat}
+          collection={collection}
+          onCollectionChange={setCollection}
         />
+
 
         <div className="mt-8">
           <FamousRecipes limit={5} />

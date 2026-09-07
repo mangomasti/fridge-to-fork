@@ -1,13 +1,14 @@
-import { Flame, ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MacroPanel } from "@/components/MacroPanel";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useMealPlan, type Day } from "@/hooks/use-meal-plan";
-import type { Recipe } from "@/data/recipes";
+import { collectionLabels, difficultyLabels, type Recipe } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
+
 
 const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -52,9 +53,15 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
             )}
 
             <div className="mt-6 flex flex-wrap items-center gap-2">
+              {recipe.collection && (
+                <Badge className="bg-primary text-primary-foreground">
+                  {collectionLabels[recipe.collection]}
+                </Badge>
+              )}
               <Badge variant="secondary">{recipe.cuisine}</Badge>
               <Badge
                 variant="outline"
+
                 className={cn(
                   "capitalize",
                   recipe.diet === "vegan" && "border-green-600 text-green-700",
@@ -99,6 +106,22 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 <Utensils className="h-4 w-4" />
                 {recipe.servings} serving{recipe.servings === 1 ? "" : "s"}
               </span>
+              {recipe.difficulty && (
+                <span className="flex items-center gap-1">
+                  {[1, 2, 3].map((n) => (
+                    <Star
+                      key={n}
+                      className={cn(
+                        "h-4 w-4",
+                        n <= (recipe.difficulty ?? 0)
+                          ? "fill-primary text-primary"
+                          : "text-muted-foreground/40"
+                      )}
+                    />
+                  ))}
+                  <span className="ml-1">{difficultyLabels[recipe.difficulty]}</span>
+                </span>
+              )}
             </div>
 
             <div className="mt-8">
@@ -115,6 +138,17 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 ))}
               </ul>
             </div>
+
+            {recipe.technique && (
+              <div className="mt-6 flex gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-4">
+                <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <div>
+                  <p className="font-display text-lg text-foreground">Chef technique</p>
+                  <p className="mt-1 text-sm text-foreground/80">{recipe.technique}</p>
+                </div>
+              </div>
+            )}
+
 
             <div className="mt-8">
               <h2 className="font-display text-2xl text-foreground">Instructions</h2>
