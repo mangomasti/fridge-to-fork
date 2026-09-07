@@ -2,7 +2,7 @@ import { Search, ChefHat } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { cuisines, dietLabels } from "@/data/recipes";
+import { cuisines, dietLabels, collections, collectionLabels } from "@/data/recipes";
 import { meatTypeLabels, meatTypes } from "@/lib/meat";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,10 @@ interface FilterBarProps {
   onSearchChange: (value: string) => void;
   meat: string;
   onMeatChange: (value: string) => void;
+  collection: string;
+  onCollectionChange: (value: string) => void;
 }
+
 
 const dietOptions = [
   { value: "all", label: "All diets" },
