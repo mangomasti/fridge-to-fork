@@ -53,8 +53,13 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
             )}
 
             <div className="mt-6 flex flex-wrap items-center gap-2">
+              {recipe.collection && (
+                <Badge className="bg-primary text-primary-foreground">
+                  {collectionLabels[recipe.collection]}
+                </Badge>
+              )}
               <Badge variant="secondary">{recipe.cuisine}</Badge>
-              <Badge
+
                 variant="outline"
                 className={cn(
                   "capitalize",
