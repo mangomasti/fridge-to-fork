@@ -39,6 +39,8 @@ function FridgePage() {
   );
 
   const clear = () => setSelected([]);
+  const addIngredient = (name: string) =>
+    setSelected((prev) => (prev.includes(name) ? prev : [...prev, name]));
 
   if (!hydrated) return null;
 
@@ -66,7 +68,7 @@ function FridgePage() {
           onChange={setSelected}
         />
 
-        {selected.length > 0 && <SurpriseMe selected={selected} />}
+        {selected.length > 0 && <SurpriseMe selected={selected} onAddIngredient={addIngredient} />}
 
         {selected.length > 0 && (
           <div className="mt-10">
@@ -86,6 +88,7 @@ function FridgePage() {
                     onToggleFavorite={toggle}
                     matchRatio={matchRatio}
                     missingIngredients={missingIngredients}
+                    onAddIngredient={addIngredient}
                   />
                 ))}
               </div>
@@ -106,6 +109,7 @@ function FridgePage() {
                       onToggleFavorite={toggle}
                       matchRatio={matchRatio}
                       missingIngredients={missingIngredients}
+                      onAddIngredient={addIngredient}
                     />
                   ))}
                 </div>
