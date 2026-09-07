@@ -1438,20 +1438,40 @@ const baseRecipes: Recipe[] = [
 export const recipes: Recipe[] = [...baseRecipes, ...extraRecipes, ...collectionRecipes];
 
 export const ingredientCatalog = {
-  proteins: [
+  meat: [
     "chicken breast",
     "chicken thighs",
     "ground beef",
     "ground turkey",
+    "flank steak",
+    "pork shoulder",
+    "bacon",
+    "lamb",
+  ],
+  seafood: [
     "salmon",
     "shrimp",
     "tilapia",
-    "flank steak",
-    "pork shoulder",
+    "cod",
+    "tuna",
+    "scallops",
+  ],
+  eggsDairy: [
     "eggs",
     "egg whites",
     "Greek yogurt",
+    "milk",
+    "butter",
+    "heavy cream",
+    "sour cream",
+    "cheddar cheese",
+    "parmesan",
+    "mozzarella",
+    "feta cheese",
+    "cotija cheese",
     "paneer",
+  ],
+  plantProtein: [
     "tofu",
     "tempeh",
     "chickpeas",
@@ -1488,8 +1508,6 @@ export const ingredientCatalog = {
     "parsley",
     "cilantro",
     "Thai basil",
-    "rosemary",
-    "thyme",
     "lettuce cups",
     "celery",
   ],
@@ -1558,19 +1576,18 @@ export const ingredientCatalog = {
     "dried chili",
     "chipotle peppers",
   ],
-  dairy: [
-    "butter",
-    "heavy cream",
-    "milk",
-    "Greek yogurt",
-    "sour cream",
-    "cheddar cheese",
-    "parmesan",
-    "mozzarella",
-    "feta cheese",
-    "cotija cheese",
-    "paneer",
-  ],
+};
+
+export type IngredientCategory = keyof typeof ingredientCatalog;
+
+export const ingredientCategoryLabels: Record<IngredientCategory, string> = {
+  meat: "Meat & poultry",
+  seafood: "Fish & seafood",
+  eggsDairy: "Eggs & dairy",
+  plantProtein: "Beans, tofu & plant protein",
+  veggies: "Vegetables & herbs",
+  pantry: "Pantry & grains",
+  spices: "Spices & seasoning",
 };
 
 export const allIngredients = Array.from(
