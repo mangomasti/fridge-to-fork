@@ -14,6 +14,7 @@ interface RecipeCardProps {
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   matchRatio?: number | undefined;
+  missingIngredients?: string[] | undefined;
 }
 
 export function RecipeCard({
@@ -21,8 +22,9 @@ export function RecipeCard({
   isFavorite,
   onToggleFavorite,
   matchRatio,
+  missingIngredients,
 }: RecipeCardProps) {
-  const { addRecipe } = useGroceryList();
+  const { addRecipe, addItem } = useGroceryList();
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
       <Link to="/recipes/$id" params={{ id: recipe.id }} className="relative block">
