@@ -7,6 +7,7 @@ export const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 export interface MealSlot {
   recipeId: string;
   title: string;
+  servings: number;
   protein: number;
   calories: number;
   carbs: number;
@@ -60,18 +61,21 @@ export function useMealPlan() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
   }, [plan, hydrated]);
 
-  const addToDay = useCallback((day: Day, recipe: Recipe) => {
+  const addToDay = useCallback((day: Day, recipe: Recipe, servings?: number) => {
+    const portions = Math.max(1, Math.round(servings ?? recipe.servings));
+    const factor = portions / recipe.servings;
     const slot: MealSlot = {
       recipeId: recipe.id,
       title: recipe.title,
-      protein: recipe.protein,
-      calories: recipe.calories,
-      carbs: recipe.carbs,
-      fat: recipe.fat,
+      servings: portions,
+      protein: Math.round(recipe.protein * factor),
+      calories: Math.round(recipe.calories * factor),
+      carbs: Math.round(recipe.carbs * factor),
+      fat: Math.round(recipe.fat * factor),
     };
     setPlan((prev) => ({
       ...prev,
-      [day]: [...prev[day], slot],
+      [day]: [...prev[day].filter((s) => s.recipeId !== recipe.id), slot],
     }));
   }, []);
 

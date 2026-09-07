@@ -1,4 +1,4 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind, Check } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,8 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const { addRecipe, addItem } = useGroceryList();
   const isFav = favorites.includes(recipe.id);
   const [servings, setServings] = useState(recipe.servings);
+  const [planServings, setPlanServings] = useState<number>(recipe.servings);
+  const [savedDay, setSavedDay] = useState<Day | null>(null);
   const factor = servings / recipe.servings;
   const airFryer = getAirFryerMethod(recipe);
 
@@ -275,19 +277,60 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
 
             <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
               <h3 className="font-display text-lg text-foreground">Add to meal plan</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Pick a day to add this recipe.</p>
-              <div className="mt-4 grid grid-cols-4 gap-2">
+              <p className="mt-1 text-sm text-muted-foreground">
+                How many servings, then pick a day.
+              </p>
+              <div className="mt-3 flex items-center justify-between rounded-xl bg-secondary px-3 py-2">
+                <span className="text-sm font-medium text-foreground">Servings</span>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7"
+                    aria-label="Fewer servings for meal plan"
+                    onClick={() => setPlanServings((s) => Math.max(1, s - 1))}
+                  >
+                    <Minus className="h-3.5 w-3.5" />
+                  </Button>
+                  <span className="w-6 text-center text-sm font-semibold text-foreground">
+                    {planServings}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7"
+                    aria-label="More servings for meal plan"
+                    onClick={() => setPlanServings((s) => Math.min(12, s + 1))}
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
+              <div className="mt-3 grid grid-cols-4 gap-2">
                 {days.map((day) => (
                   <Button
                     key={day}
-                    variant="secondary"
+                    variant={savedDay === day ? "default" : "secondary"}
                     size="sm"
-                    onClick={() => addToDay(day, recipe)}
+                    onClick={() => {
+                      addToDay(day, recipe, planServings);
+                      setSavedDay(day);
+                      toast.success(
+                        `Saved to ${day} — ${planServings} serving${planServings > 1 ? "s" : ""}`
+                      );
+                    }}
                   >
                     {day}
                   </Button>
                 ))}
               </div>
+              {savedDay && (
+                <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-primary">
+                  <Check className="h-4 w-4" />
+                  Saved to {savedDay} meal plan ({planServings} serving
+                  {planServings > 1 ? "s" : ""})
+                </p>
+              )}
             </div>
           </aside>
         </div>
