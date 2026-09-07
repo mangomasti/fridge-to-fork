@@ -100,7 +100,9 @@ export const recipeImages: Record<string, string> = {
   "garlic-aioli": imgGarlicAioli,
   "chimichurri": imgChimichurri,
 
+  "bbq-pulled-chicken": imgBbqPulledChicken,
   "beef-and-broccoli": imgBeefAndBroccoli,
+
   "blackened-tilapia": imgBlackenedTilapia,
   "buffalo-chicken-lettuce-wraps": imgBuffaloChickenLettuceWraps,
   "butter-chicken": imgButterChicken,
