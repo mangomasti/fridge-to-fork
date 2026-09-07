@@ -6,6 +6,7 @@ import { MacroPanel } from "@/components/MacroPanel";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useMealPlan, type Day } from "@/hooks/use-meal-plan";
 import type { Recipe } from "@/data/recipes";
+import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
 
 const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -31,14 +32,24 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div
-              className={cn(
-                "flex h-64 items-center justify-center rounded-3xl bg-gradient-to-br text-5xl font-bold text-white/90 sm:h-80",
-                recipe.imageGradient
-              )}
-            >
-              {recipe.title.slice(0, 2).toUpperCase()}
-            </div>
+            {recipeImages[recipe.id] ? (
+              <img
+                src={recipeImages[recipe.id]}
+                alt={`${recipe.title} — ${recipe.cuisine} high-protein recipe`}
+                width={768}
+                height={512}
+                className="h-64 w-full rounded-3xl object-cover sm:h-80"
+              />
+            ) : (
+              <div
+                className={cn(
+                  "flex h-64 items-center justify-center rounded-3xl bg-gradient-to-br text-5xl font-bold text-white/90 sm:h-80",
+                  recipe.imageGradient
+                )}
+              >
+                {recipe.title.slice(0, 2).toUpperCase()}
+              </div>
+            )}
 
             <div className="mt-6 flex flex-wrap items-center gap-2">
               <Badge variant="secondary">{recipe.cuisine}</Badge>
