@@ -36,6 +36,7 @@ function RecipesPage() {
   const [search, setSearch] = useState<string>("");
   const [meat, setMeat] = useState<string>("all");
   const [collection, setCollection] = useState<string>(collectionParam ?? "all");
+  const [airFryerOnly, setAirFryerOnly] = useState<boolean>(false);
 
   const filtered = useMemo(() => {
     return recipes.filter((r) => {
@@ -46,6 +47,7 @@ function RecipesPage() {
       if (r.protein < minProtein) return false;
       if (r.timeMinutes > maxTime) return false;
       if (chefOnly && !r.chef) return false;
+      if (airFryerOnly && !isAirFryerFriendly(r)) return false;
       if (search.trim()) {
         const q = search.toLowerCase();
         return (
@@ -56,7 +58,7 @@ function RecipesPage() {
       }
       return true;
     });
-  }, [diet, cuisine, minProtein, maxTime, chefOnly, search, meat, collection]);
+  }, [diet, cuisine, minProtein, maxTime, chefOnly, search, meat, collection, airFryerOnly]);
 
   if (!hydrated) return null;
 
@@ -92,6 +94,8 @@ function RecipesPage() {
           onMeatChange={setMeat}
           collection={collection}
           onCollectionChange={setCollection}
+          airFryerOnly={airFryerOnly}
+          onAirFryerOnlyChange={setAirFryerOnly}
         />
 
 
