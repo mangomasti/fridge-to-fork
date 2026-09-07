@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Search, X } from "lucide-react";
+import { Search, X, Check, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ingredientCategoryLabels } from "@/data/recipes";
 import { cn } from "@/lib/utils";
 
 interface IngredientPickerProps {
@@ -11,29 +12,10 @@ interface IngredientPickerProps {
   onChange: (selected: string[]) => void;
 }
 
-const groupLabels: Record<string, string> = {
-  proteins: "Proteins",
-  veggies: "Vegetables",
-  pantry: "Pantry & Grains",
-  spices: "Spices",
-  dairy: "Dairy",
-};
-
 export function IngredientPicker({ catalog, selected, onChange }: IngredientPickerProps) {
   const [query, setQuery] = useState("");
-  const [activeGroup, setActiveGroup] = useState<string | null>(null);
-
-  const all = Object.entries(catalog).flatMap(([group, items]) =>
-    items.map((name) => ({ group, name }))
-  );
-
-  const uniqueItems = Array.from(new Map(all.map((item) => [item.name, item])).values());
-
-  const filtered = uniqueItems.filter((item) => {
-    const matchesQuery = item.name.toLowerCase().includes(query.toLowerCase());
-    const matchesGroup = activeGroup ? item.group === activeGroup : true;
-    return matchesQuery && matchesGroup;
-  });
+  const groups = Object.keys(catalog);
+  const [collapsed, setCollapsed] = useState<string[]>([]);
 
   const toggle = (name: string) => {
     onChange(
@@ -41,82 +23,101 @@ export function IngredientPicker({ catalog, selected, onChange }: IngredientPick
     );
   };
 
+  const toggleGroup = (group: string) =>
+    setCollapsed((prev) =>
+      prev.includes(group) ? prev.filter((g) => g !== group) : [...prev, group]
+    );
+
+  const label = (group: string) =>
+    ingredientCategoryLabels[group as keyof typeof ingredientCategoryLabels] ?? group;
+
   return (
-    <div className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search ingredients..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="pl-9"
-          />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setActiveGroup(null)}
-            className={cn(
-              "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-              activeGroup === null
-                ? "bg-primary text-primary-foreground"
-                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            )}
-          >
-            All
-          </button>
-          {Object.keys(catalog).map((group) => (
-            <button
-              key={group}
-              onClick={() => setActiveGroup(group === activeGroup ? null : group)}
-              className={cn(
-                "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-                activeGroup === group
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              )}
-            >
-              {groupLabels[group] || group}
-            </button>
-          ))}
-        </div>
+    <div className="space-y-5 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          placeholder="Search ingredients..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="pl-9"
+        />
       </div>
 
       {selected.length > 0 && (
-        <div className="flex flex-wrap gap-2 border-t border-border pt-4">
+        <div className="flex flex-wrap items-center gap-2 rounded-xl bg-secondary p-3">
+          <span className="text-sm font-medium text-foreground">
+            {selected.length} selected
+          </span>
           {selected.map((name) => (
-            <Badge key={name} variant="secondary" className="gap-1 pr-1">
+            <Badge key={name} variant="default" className="gap-1 pr-1">
               {name}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-4 w-4 rounded-full"
+              <button
                 onClick={() => toggle(name)}
+                className="rounded-full p-0.5 hover:bg-primary-foreground/20"
                 aria-label={`Remove ${name}`}
               >
                 <X className="h-3 w-3" />
-              </Button>
+              </button>
             </Badge>
           ))}
+          <Button variant="ghost" size="sm" onClick={() => onChange([])}>
+            Clear all
+          </Button>
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2">
-        {filtered.map((item) => {
-          const isSelected = selected.includes(item.name);
+      <div className="space-y-4">
+        {groups.map((group) => {
+          const items = (catalog[group] ?? []).filter((name) =>
+            name.toLowerCase().includes(query.toLowerCase())
+          );
+          if (items.length === 0) return null;
+          const isOpen = !collapsed.includes(group);
+          const count = items.filter((i) => selected.includes(i)).length;
+
           return (
-            <button
-              key={item.name}
-              onClick={() => toggle(item.name)}
-              className={cn(
-                "rounded-full border px-3 py-1.5 text-sm font-medium transition-colors",
-                isSelected
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-background text-foreground hover:bg-secondary"
+            <div key={group} className="rounded-xl border border-border">
+              <button
+                onClick={() => toggleGroup(group)}
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+              >
+                <span className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  {label(group)}
+                  {count > 0 && (
+                    <Badge variant="secondary" className="text-xs">{count}</Badge>
+                  )}
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 text-muted-foreground transition-transform",
+                    !isOpen && "-rotate-90"
+                  )}
+                />
+              </button>
+              {isOpen && (
+                <div className="flex flex-wrap gap-2 border-t border-border p-4">
+                  {items.map((name) => {
+                    const isSelected = selected.includes(name);
+                    return (
+                      <button
+                        key={name}
+                        onClick={() => toggle(name)}
+                        aria-pressed={isSelected}
+                        className={cn(
+                          "flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-medium transition-colors",
+                          isSelected
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-background text-foreground hover:bg-secondary"
+                        )}
+                      >
+                        {isSelected && <Check className="h-3.5 w-3.5" />}
+                        {name}
+                      </button>
+                    );
+                  })}
+                </div>
               )}
-            >
-              {item.name}
-            </button>
+            </div>
           );
         })}
       </div>
