@@ -1,4 +1,4 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ interface RecipeDetailProps {
 export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const { favorites, toggle } = useFavorites();
   const { addToDay } = useMealPlan();
-  const { addRecipe } = useGroceryList();
+  const { addRecipe, addItem } = useGroceryList();
   const isFav = favorites.includes(recipe.id);
   const [servings, setServings] = useState(recipe.servings);
   const factor = servings / recipe.servings;
@@ -164,11 +164,25 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                 {recipe.ingredients.map((ing, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start justify-between rounded-xl border border-border bg-card p-3"
+                    className="flex items-start justify-between gap-2 rounded-xl border border-border bg-card p-3"
                   >
                     <span className="font-medium text-foreground">{ing.name}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {scaleAmount(ing.amount, factor)}
+                    <span className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground">
+                        {scaleAmount(ing.amount, factor)}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          addItem(ing.name);
+                          toast.success(`${ing.name} added to your grocery list`);
+                        }}
+                        className="text-muted-foreground transition-colors hover:text-primary"
+                        aria-label={`Add ${ing.name} to grocery list`}
+                        title="Add to grocery list"
+                      >
+                        <PlusCircle className="h-4 w-4" />
+                      </button>
                     </span>
                   </li>
                 ))}

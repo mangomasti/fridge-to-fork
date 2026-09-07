@@ -32,6 +32,12 @@ function FridgePage() {
     [selected]
   );
 
+  const readyNow = useMemo(() => matches.filter((m) => m.matchRatio >= 0.7), [matches]);
+  const almostThere = useMemo(
+    () => matches.filter((m) => m.matchRatio >= 0.4 && m.matchRatio < 0.7).slice(0, 12),
+    [matches]
+  );
+
   const clear = () => setSelected([]);
 
   if (!hydrated) return null;
@@ -62,38 +68,75 @@ function FridgePage() {
 
         {selected.length > 0 && <SurpriseMe selected={selected} />}
 
-        <div className="mt-10">
-          <h2 className="font-display text-2xl text-foreground">
-            {selected.length === 0 ? "All recipes" : "Best matches"}
-          </h2>
-          <p className="mt-1 text-muted-foreground">
-            {selected.length === 0
-              ? `${recipes.length} recipes to browse`
-              : `${matches.length} recipes match your fridge`}
-          </p>
+        {selected.length > 0 && (
+          <div className="mt-10">
+            <h2 className="font-display text-2xl text-foreground">Cook this tonight</h2>
+            <p className="mt-1 text-muted-foreground">
+              {readyNow.length === 0
+                ? "Nothing is a full match yet — check the near-misses below."
+                : `${readyNow.length} dish${readyNow.length === 1 ? "" : "es"} you can make with almost everything you already have`}
+            </p>
+            {readyNow.length > 0 && (
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {readyNow.map(({ recipe, matchRatio, missingIngredients }) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    isFavorite={favorites.includes(recipe.id)}
+                    onToggleFavorite={toggle}
+                    matchRatio={matchRatio}
+                    missingIngredients={missingIngredients}
+                  />
+                ))}
+              </div>
+            )}
 
-          {matches.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-border bg-secondary p-8 text-center">
-              <p className="text-lg font-medium text-foreground">No strong matches yet.</p>
-              <p className="mt-2 text-muted-foreground">Add more ingredients to see ranked results.</p>
-            </div>
-          ) : (
+            {almostThere.length > 0 && (
+              <>
+                <h2 className="mt-12 font-display text-2xl text-foreground">Almost there</h2>
+                <p className="mt-1 text-muted-foreground">
+                  Just a few items short — tap any missing ingredient to add it to your grocery list.
+                </p>
+                <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {almostThere.map(({ recipe, matchRatio, missingIngredients }) => (
+                    <RecipeCard
+                      key={recipe.id}
+                      recipe={recipe}
+                      isFavorite={favorites.includes(recipe.id)}
+                      onToggleFavorite={toggle}
+                      matchRatio={matchRatio}
+                      missingIngredients={missingIngredients}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {readyNow.length === 0 && almostThere.length === 0 && (
+              <div className="mt-8 rounded-2xl border border-border bg-secondary p-8 text-center">
+                <p className="text-lg font-medium text-foreground">No strong matches yet.</p>
+                <p className="mt-2 text-muted-foreground">Add more ingredients to see ranked results.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {selected.length === 0 && (
+          <div className="mt-10">
+            <h2 className="font-display text-2xl text-foreground">All recipes</h2>
+            <p className="mt-1 text-muted-foreground">{recipes.length} recipes to browse</p>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {(selected.length === 0
-                ? recipes.map((r) => ({ recipe: r, matchedIngredients: [], matchRatio: undefined }))
-                : matches
-              ).map(({ recipe, matchRatio }) => (
+              {recipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
                   recipe={recipe}
                   isFavorite={favorites.includes(recipe.id)}
                   onToggleFavorite={toggle}
-                  matchRatio={matchRatio}
                 />
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
