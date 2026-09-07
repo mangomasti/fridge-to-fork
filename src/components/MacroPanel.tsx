@@ -3,10 +3,12 @@ import type { Recipe } from "@/data/recipes";
 
 interface MacroPanelProps {
   recipe: Recipe;
+  servings?: number;
 }
 
-export function MacroPanel({ recipe }: MacroPanelProps) {
+export function MacroPanel({ recipe, servings }: MacroPanelProps) {
   const perIngredient = recipe.ingredients.filter((i) => i.macros);
+  const batch = servings ?? recipe.servings;
 
   return (
     <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
@@ -36,6 +38,13 @@ export function MacroPanel({ recipe }: MacroPanelProps) {
             <Droplet className="h-3 w-3" /> Fat
           </p>
         </div>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-border p-3 text-sm">
+        <p className="font-medium text-foreground">Batch total ({batch} servings)</p>
+        <p className="mt-1 text-muted-foreground">
+          {recipe.protein * batch}g protein · {recipe.calories * batch} calories
+        </p>
       </div>
 
       {perIngredient.length > 0 && (

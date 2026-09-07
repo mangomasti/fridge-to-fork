@@ -1,4 +1,5 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,9 @@ import { useMealPlan, type Day } from "@/hooks/use-meal-plan";
 import { collectionLabels, difficultyLabels, type Recipe } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
+import { scaleAmount } from "@/lib/scale";
+import { useGroceryList } from "@/hooks/use-grocery";
+import { toast } from "sonner";
 
 
 const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -19,7 +23,10 @@ interface RecipeDetailProps {
 export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const { favorites, toggle } = useFavorites();
   const { addToDay } = useMealPlan();
+  const { addRecipe } = useGroceryList();
   const isFav = favorites.includes(recipe.id);
+  const [servings, setServings] = useState(recipe.servings);
+  const factor = servings / recipe.servings;
 
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8">
@@ -104,7 +111,7 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
               </span>
               <span className="flex items-center gap-1">
                 <Utensils className="h-4 w-4" />
-                {recipe.servings} serving{recipe.servings === 1 ? "" : "s"}
+                {servings} serving{servings === 1 ? "" : "s"}
               </span>
               {recipe.difficulty && (
                 <span className="flex items-center gap-1">
@@ -125,7 +132,34 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
             </div>
 
             <div className="mt-8">
-              <h2 className="font-display text-2xl text-foreground">Ingredients</h2>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-display text-2xl text-foreground">Ingredients</h2>
+                <div className="flex items-center gap-3 rounded-full border border-border bg-card px-3 py-1.5">
+                  <span className="text-sm text-muted-foreground">Cooking for</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full"
+                    onClick={() => setServings((s) => Math.max(1, s - 1))}
+                    aria-label="Fewer servings"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="w-6 text-center font-semibold text-foreground">{servings}</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full"
+                    onClick={() => setServings((s) => Math.min(12, s + 1))}
+                    aria-label="More servings"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Amounts and spices adjust automatically to your serving count.
+              </p>
               <ul className="mt-4 grid gap-2 sm:grid-cols-2">
                 {recipe.ingredients.map((ing, idx) => (
                   <li
@@ -133,7 +167,9 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                     className="flex items-start justify-between rounded-xl border border-border bg-card p-3"
                   >
                     <span className="font-medium text-foreground">{ing.name}</span>
-                    <span className="text-sm text-muted-foreground">{ing.amount}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {scaleAmount(ing.amount, factor)}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -166,7 +202,7 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
           </div>
 
           <aside className="space-y-6 lg:col-span-1">
-            <MacroPanel recipe={recipe} />
+            <MacroPanel recipe={recipe} servings={servings} />
 
             <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
               <h3 className="font-display text-lg text-foreground">Actions</h3>
@@ -177,7 +213,18 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
                   onClick={() => toggle(recipe.id)}
                 >
                   <Heart className={cn("h-4 w-4", isFav && "fill-current")} />
-                  {isFav ? "Saved to favorites" : "Add to favorites"}
+                  {isFav ? "Saved" : "Save this dish"}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={() => {
+                    addRecipe(recipe, factor, scaleAmount);
+                    toast.success(`Ingredients for ${recipe.title} added to your grocery list`);
+                  }}
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  Add to grocery list
                 </Button>
               </div>
             </div>
