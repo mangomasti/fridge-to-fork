@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { recipes, cuisines, dietLabels } from "@/data/recipes";
+import { recipes, cuisines, collectionLabels, type Collection } from "@/data/recipes";
 import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
 import { FamousRecipes } from "@/components/FamousRecipes";
 import { getMeatType } from "@/lib/meat";
+
 
 export const Route = createFileRoute("/recipes/")({
   head: () => ({

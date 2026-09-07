@@ -48,6 +48,8 @@ export function FilterBar({
   onSearchChange,
   meat,
   onMeatChange,
+  collection,
+  onCollectionChange,
 }: FilterBarProps) {
   return (
     <div className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
@@ -60,6 +62,29 @@ export function FilterBar({
           className="pl-9"
         />
       </div>
+
+      <div>
+        <p className="mb-2 text-sm font-medium text-foreground">Collection</p>
+        <div className="flex flex-wrap gap-2">
+          {[{ value: "all", label: "All collections" }, ...collections.map((c) => ({ value: c, label: collectionLabels[c] }))].map(
+            (opt) => (
+              <button
+                key={opt.value}
+                onClick={() => onCollectionChange(opt.value)}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                  collection === opt.value
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                )}
+              >
+                {opt.label}
+              </button>
+            )
+          )}
+        </div>
+      </div>
+
 
       <div>
         <p className="mb-2 text-sm font-medium text-foreground">Cuisine</p>
