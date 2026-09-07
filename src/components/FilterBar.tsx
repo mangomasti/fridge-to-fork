@@ -1,4 +1,4 @@
-import { Search, ChefHat } from "lucide-react";
+import { Search, ChefHat, Wind } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +23,10 @@ interface FilterBarProps {
   onMeatChange: (value: string) => void;
   collection: string;
   onCollectionChange: (value: string) => void;
+  airFryerOnly: boolean;
+  onAirFryerOnlyChange: (value: boolean) => void;
 }
+
 
 
 const dietOptions = [
