@@ -1,7 +1,9 @@
-import { Sparkles } from "lucide-react";
+import { Sparkles, PlusCircle } from "lucide-react";
 import { suggestSurprise } from "@/lib/matcher";
 import { Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/badge";
+import { useGroceryList } from "@/hooks/use-grocery";
+import { toast } from "sonner";
 
 interface SurpriseMeProps {
   selected: string[];
@@ -10,6 +12,7 @@ interface SurpriseMeProps {
 
 export function SurpriseMe({ selected }: SurpriseMeProps) {
   const suggestions = suggestSurprise(selected, 3);
+  const { addItem } = useGroceryList();
 
   if (suggestions.length === 0) return null;
 
@@ -19,19 +22,51 @@ export function SurpriseMe({ selected }: SurpriseMeProps) {
         <Sparkles className="h-5 w-5 text-primary" />
         <h3 className="font-display text-lg text-foreground">Surprise me</h3>
       </div>
-      <div className="flex flex-wrap gap-3">
-        {suggestions.map(({ recipe, matchRatio }) => (
-          <Link
+      <div className="grid gap-3 sm:grid-cols-3">
+        {suggestions.map(({ recipe, matchRatio, missingIngredients }) => (
+          <div
             key={recipe.id}
-            to="/recipes/$id"
-            params={{ id: recipe.id }}
-            className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary hover:text-primary"
+            className="rounded-xl border border-border bg-background p-3 shadow-sm"
           >
-            {recipe.title}
-            <Badge variant="secondary" className="text-xs">
-              {Math.round(matchRatio * 100)}%
-            </Badge>
-          </Link>
+            <div className="flex items-start justify-between gap-2">
+              <Link
+                to="/recipes/$id"
+                params={{ id: recipe.id }}
+                className="font-medium text-foreground hover:text-primary"
+              >
+                {recipe.title}
+              </Link>
+              <Badge variant="secondary" className="shrink-0 text-xs">
+                {Math.round(matchRatio * 100)}%
+              </Badge>
+            </div>
+            {missingIngredients.length > 0 && (
+              <>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Missing {missingIngredients.length} item
+                  {missingIngredients.length === 1 ? "" : "s"}:
+                </p>
+                <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                  {missingIngredients.map((name) => (
+                    <li key={name}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          addItem(name);
+                          toast.success(`${name} added to your grocery list`);
+                        }}
+                        className="flex items-center gap-1 rounded-full border border-border px-2 py-1 text-xs text-foreground transition-colors hover:border-primary hover:text-primary"
+                        aria-label={`Add ${name} to grocery list`}
+                      >
+                        {name}
+                        <PlusCircle className="h-3.5 w-3.5" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
         ))}
       </div>
     </div>
