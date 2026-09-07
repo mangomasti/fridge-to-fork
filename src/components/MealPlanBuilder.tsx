@@ -7,10 +7,13 @@ import { useMealPlan, days, type Day } from "@/hooks/use-meal-plan";
 import { recipes } from "@/data/recipes";
 
 export function MealPlanBuilder() {
-  const { plan, removeFromDay, clearDay, clearPlan, totals, hydrated } = useMealPlan();
+  const { plan, addToDay, removeFromDay, clearDay, clearPlan, totals, hydrated } = useMealPlan();
   const [query, setQuery] = useState("");
   const [openDay, setOpenDay] = useState<Day | null>(null);
-  const { addToDay } = useMealPlan();
+  const [pendingServings, setPendingServings] = useState(2);
+  const [justSaved, setJustSaved] = useState<{ day: Day; title: string; servings: number } | null>(
+    null
+  );
 
   const { weekly, daily } = totals();
 
