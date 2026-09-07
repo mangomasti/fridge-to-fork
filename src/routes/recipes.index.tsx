@@ -4,7 +4,6 @@ import { recipes, cuisines, collectionLabels, type Collection } from "@/data/rec
 import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
-import { FamousRecipes } from "@/components/FamousRecipes";
 import { getMeatType } from "@/lib/meat";
 
 
@@ -94,10 +93,6 @@ function RecipesPage() {
           onCollectionChange={setCollection}
         />
 
-
-        <div className="mt-8">
-          <FamousRecipes limit={5} />
-        </div>
 
         {filtered.length === 0 ? (
           <div className="mt-12 rounded-2xl border border-border bg-secondary p-8 text-center">
