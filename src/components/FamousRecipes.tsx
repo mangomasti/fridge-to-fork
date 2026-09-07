@@ -54,7 +54,7 @@ export function FamousRecipes({ limit = 6 }: { limit?: number }) {
             <div className="flex shrink-0 items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1 font-semibold text-foreground">
                 <Dumbbell className="h-4 w-4 text-primary" />
-                {recipe.protein}g protein
+                {recipe.protein}g protein protein
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />

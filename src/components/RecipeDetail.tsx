@@ -1,13 +1,14 @@
-import { Flame, ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MacroPanel } from "@/components/MacroPanel";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useMealPlan, type Day } from "@/hooks/use-meal-plan";
-import type { Recipe } from "@/data/recipes";
+import { collectionLabels, difficultyLabels, type Recipe } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
+
 
 const days: Day[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
