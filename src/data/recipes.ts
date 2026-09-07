@@ -1435,7 +1435,7 @@ const baseRecipes: Recipe[] = [
   },
 ];
 
-export const recipes: Recipe[] = [...baseRecipes, ...extraRecipes];
+export const recipes: Recipe[] = [...baseRecipes, ...extraRecipes, ...collectionRecipes];
 
 export const ingredientCatalog = {
   proteins: [
