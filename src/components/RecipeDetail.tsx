@@ -1,4 +1,4 @@
-import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle } from "lucide-react";
+import { ChefHat, Clock, ArrowLeft, Heart, ExternalLink, Utensils, Star, Lightbulb, Minus, Plus, ShoppingCart, PlusCircle, Wind } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { recipeImages } from "@/data/recipe-images";
 import { cn } from "@/lib/utils";
 import { scaleAmount } from "@/lib/scale";
 import { useGroceryList } from "@/hooks/use-grocery";
+import { getAirFryerMethod } from "@/lib/airfryer";
 import { toast } from "sonner";
 
 
@@ -27,6 +28,7 @@ export function RecipeDetail({ recipe }: RecipeDetailProps) {
   const isFav = favorites.includes(recipe.id);
   const [servings, setServings] = useState(recipe.servings);
   const factor = servings / recipe.servings;
+  const airFryer = getAirFryerMethod(recipe);
 
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8">
