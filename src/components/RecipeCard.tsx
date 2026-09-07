@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Flame, ChefHat, Heart } from "lucide-react";
+import { Clock, Dumbbell, ChefHat, Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { Recipe } from "@/data/recipes";
+import { difficultyLabels, type Recipe } from "@/data/recipes";
 import { recipeImages } from "@/data/recipe-images";
+
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -100,8 +101,8 @@ export function RecipeCard({
         <div className="mt-auto flex items-center justify-between pt-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1 font-semibold text-foreground">
-              <Flame className="h-4 w-4 text-primary" />
-              {recipe.protein}g
+              <Dumbbell className="h-4 w-4 text-primary" />
+              {recipe.protein}g protein
             </span>
             <span className="flex items-center gap-1">
               <ChefHat className="h-4 w-4" />
@@ -113,7 +114,23 @@ export function RecipeCard({
             {recipe.timeMinutes}m
           </span>
         </div>
+
+        {recipe.difficulty && (
+          <div className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+            {[1, 2, 3].map((n) => (
+              <Star
+                key={n}
+                className={cn(
+                  "h-3.5 w-3.5",
+                  n <= (recipe.difficulty ?? 0) ? "fill-primary text-primary" : "text-muted-foreground/40"
+                )}
+              />
+            ))}
+            <span className="ml-1">{difficultyLabels[recipe.difficulty]}</span>
+          </div>
+        )}
       </div>
+
     </div>
   );
 }
