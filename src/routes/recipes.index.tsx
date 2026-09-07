@@ -4,6 +4,8 @@ import { recipes, cuisines, dietLabels } from "@/data/recipes";
 import { useFavorites } from "@/hooks/use-favorites";
 import { RecipeCard } from "@/components/RecipeCard";
 import { FilterBar } from "@/components/FilterBar";
+import { FamousRecipes } from "@/components/FamousRecipes";
+import { getMeatType } from "@/lib/meat";
 
 export const Route = createFileRoute("/recipes/")({
   head: () => ({
@@ -27,11 +29,13 @@ function RecipesPage() {
   const [maxTime, setMaxTime] = useState<number>(120);
   const [chefOnly, setChefOnly] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [meat, setMeat] = useState<string>("all");
 
   const filtered = useMemo(() => {
     return recipes.filter((r) => {
       if (diet !== "all" && r.diet !== diet) return false;
       if (cuisine !== "all" && r.cuisine !== cuisine) return false;
+      if (meat !== "all" && getMeatType(r) !== meat) return false;
       if (r.protein < minProtein) return false;
       if (r.timeMinutes > maxTime) return false;
       if (chefOnly && !r.chef) return false;
@@ -45,7 +49,7 @@ function RecipesPage() {
       }
       return true;
     });
-  }, [diet, cuisine, minProtein, maxTime, chefOnly, search]);
+  }, [diet, cuisine, minProtein, maxTime, chefOnly, search, meat]);
 
   if (!hydrated) return null;
 
@@ -72,7 +76,13 @@ function RecipesPage() {
           onChefOnlyChange={setChefOnly}
           search={search}
           onSearchChange={setSearch}
+          meat={meat}
+          onMeatChange={setMeat}
         />
+
+        <div className="mt-8">
+          <FamousRecipes limit={5} />
+        </div>
 
         {filtered.length === 0 ? (
           <div className="mt-12 rounded-2xl border border-border bg-secondary p-8 text-center">

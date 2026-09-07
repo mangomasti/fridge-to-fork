@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { cuisines, dietLabels } from "@/data/recipes";
+import { meatTypeLabels, meatTypes } from "@/lib/meat";
 import { cn } from "@/lib/utils";
 
 interface FilterBarProps {
@@ -18,6 +19,8 @@ interface FilterBarProps {
   onChefOnlyChange: (value: boolean) => void;
   search: string;
   onSearchChange: (value: string) => void;
+  meat: string;
+  onMeatChange: (value: string) => void;
 }
 
 const dietOptions = [
@@ -40,6 +43,8 @@ export function FilterBar({
   onChefOnlyChange,
   search,
   onSearchChange,
+  meat,
+  onMeatChange,
 }: FilterBarProps) {
   return (
     <div className="space-y-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
@@ -51,6 +56,50 @@ export function FilterBar({
           onChange={(e) => onSearchChange(e.target.value)}
           className="pl-9"
         />
+      </div>
+
+      <div>
+        <p className="mb-2 text-sm font-medium text-foreground">Cuisine</p>
+        <div className="flex flex-wrap gap-2">
+          {[{ value: "all", label: "All cuisines" }, ...cuisines.map((c) => ({ value: c, label: c }))].map(
+            (opt) => (
+              <button
+                key={opt.value}
+                onClick={() => onCuisineChange(opt.value)}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                  cuisine === opt.value
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                )}
+              >
+                {opt.label}
+              </button>
+            )
+          )}
+        </div>
+      </div>
+
+      <div>
+        <p className="mb-2 text-sm font-medium text-foreground">Protein type</p>
+        <div className="flex flex-wrap gap-2">
+          {[{ value: "all", label: "All proteins" }, ...meatTypes.map((m) => ({ value: m, label: meatTypeLabels[m] }))].map(
+            (opt) => (
+              <button
+                key={opt.value}
+                onClick={() => onMeatChange(opt.value)}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                  meat === opt.value
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                )}
+              >
+                {opt.label}
+              </button>
+            )
+          )}
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
@@ -70,19 +119,6 @@ export function FilterBar({
         ))}
 
         <div className="mx-2 hidden h-6 w-px bg-border sm:block" />
-
-        <select
-          value={cuisine}
-          onChange={(e) => onCuisineChange(e.target.value)}
-          className="rounded-full border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          <option value="all">All cuisines</option>
-          {cuisines.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
 
         <button
           onClick={() => onChefOnlyChange(!chefOnly)}

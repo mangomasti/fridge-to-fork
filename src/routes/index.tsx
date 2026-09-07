@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ChefHat, Flame, Refrigerator, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero.jpg";
+import { FamousRecipes } from "@/components/FamousRecipes";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -100,12 +101,26 @@ function HomePage() {
       </section>
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-3xl text-foreground">Chef-inspired, gym-approved</h2>
-          <p className="mt-4 text-muted-foreground">
-            Discover dishes inspired by world-famous chefs — reimagined with high-protein, healthy-eating macros. From classic Italian ragus to Indian tandoori and Japanese miso glazes.
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <h2 className="font-display text-2xl text-foreground">What's in your fridge?</h2>
+            <p className="mt-2 text-muted-foreground">
+              Tick off the ingredients you already have and we'll rank every recipe by how much of it you can cook tonight.
+            </p>
+            <Button asChild className="mt-6 gap-2">
+              <Link to="/fridge">
+                <Refrigerator className="h-5 w-5" />
+                Start with my ingredients
+              </Link>
+            </Button>
+          </div>
+          <FamousRecipes limit={5} />
+        </div>
+        <div className="mx-auto mt-10 max-w-4xl text-center">
+          <p className="text-muted-foreground">
+            Dishes inspired by world-famous chefs — reimagined with high-protein macros, plus chicken, turkey, beef, lamb, pork and seafood options.
           </p>
-          <Button asChild className="mt-8 gap-2">
+          <Button asChild className="mt-6 gap-2">
             <Link to="/recipes">
               <Search className="h-5 w-5" />
               Explore recipes

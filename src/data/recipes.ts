@@ -1,3 +1,5 @@
+import { extraRecipes } from "./recipes-extra";
+
 export type Diet = "meat" | "vegetarian" | "vegan";
 
 export type Cuisine =
@@ -62,7 +64,7 @@ export const dietLabels: Record<Diet, string> = {
 
 const g = (gradient: string) => gradient;
 
-export const recipes: Recipe[] = [
+const baseRecipes: Recipe[] = [
   {
     id: "butter-chicken",
     title: "Butter Chicken",
@@ -1390,6 +1392,8 @@ export const recipes: Recipe[] = [
     imageGradient: g("from-amber-600 to-yellow-700"),
   },
 ];
+
+export const recipes: Recipe[] = [...baseRecipes, ...extraRecipes];
 
 export const ingredientCatalog = {
   proteins: [

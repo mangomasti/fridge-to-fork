@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { Recipe } from "@/data/recipes";
+import { recipeImages } from "@/data/recipe-images";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -21,14 +22,25 @@ export function RecipeCard({
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
       <Link to="/recipes/$id" params={{ id: recipe.id }} className="relative block">
-        <div
-          className={cn(
-            "flex h-40 items-center justify-center bg-gradient-to-br text-3xl font-bold text-white/90",
-            recipe.imageGradient
-          )}
-        >
-          {recipe.title.slice(0, 2).toUpperCase()}
-        </div>
+        {recipeImages[recipe.id] ? (
+          <img
+            src={recipeImages[recipe.id]}
+            alt={`${recipe.title} — ${recipe.cuisine} high-protein recipe`}
+            width={768}
+            height={512}
+            loading="lazy"
+            className="h-40 w-full object-cover"
+          />
+        ) : (
+          <div
+            className={cn(
+              "flex h-40 items-center justify-center bg-gradient-to-br text-3xl font-bold text-white/90",
+              recipe.imageGradient
+            )}
+          >
+            {recipe.title.slice(0, 2).toUpperCase()}
+          </div>
+        )}
         {typeof matchRatio === "number" && (
           <div className="absolute left-3 top-3 rounded-full bg-background/90 px-2 py-1 text-xs font-semibold text-foreground shadow">
             {Math.round(matchRatio * 100)}% match
