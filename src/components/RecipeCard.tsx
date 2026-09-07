@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Dumbbell, ChefHat, Heart, Star, ShoppingCart, PlusCircle, Wind } from "lucide-react";
+import { Clock, Dumbbell, ChefHat, Heart, Star, PlusCircle, Wind } from "lucide-react";
 import { isAirFryerFriendly } from "@/lib/airfryer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -175,22 +175,6 @@ export function RecipeCard({
             </ul>
           </div>
         )}
-
-
-        <div className="mt-3">
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full gap-2"
-            onClick={() => {
-              addRecipe(recipe);
-              toast.success(`Ingredients for ${recipe.title} added to your grocery list`);
-            }}
-          >
-            <ShoppingCart className="h-4 w-4" />
-            Add to grocery list
-          </Button>
-        </div>
       </div>
 
     </div>

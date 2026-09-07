@@ -8,9 +8,10 @@ import { toast } from "sonner";
 interface SurpriseMeProps {
   selected: string[];
   onRecipeClick?: (id: string) => void;
+  onAddIngredient?: ((name: string) => void) | undefined;
 }
 
-export function SurpriseMe({ selected }: SurpriseMeProps) {
+export function SurpriseMe({ selected, onAddIngredient }: SurpriseMeProps) {
   const suggestions = suggestSurprise(selected, 3);
   const { addItem } = useGroceryList();
 
