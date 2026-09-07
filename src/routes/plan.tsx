@@ -4,9 +4,9 @@ import { MealPlanBuilder } from "@/components/MealPlanBuilder";
 export const Route = createFileRoute("/plan")({
   head: () => ({
     meta: [
-      { title: "Meal Plan — Fuel Kitchen" },
+      { title: "Meal Plan — Fridge To Fork" },
       { name: "description", content: "Build a weekly high-protein meal plan and track daily and weekly macros." },
-      { property: "og:title", content: "Meal Plan — Fuel Kitchen" },
+      { property: "og:title", content: "Meal Plan — Fridge To Fork" },
       { property: "og:description", content: "Build a weekly high-protein meal plan and track daily and weekly macros." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

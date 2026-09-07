@@ -9,10 +9,10 @@ import { Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/favorites")({
   head: () => ({
     meta: [
-      { title: "My Favorites — Fuel Kitchen" },
-      { name: "description", content: "Your saved high-protein recipes from Fuel Kitchen." },
-      { property: "og:title", content: "My Favorites — Fuel Kitchen" },
-      { property: "og:description", content: "Your saved high-protein recipes from Fuel Kitchen." },
+      { title: "My Favorites — Fridge To Fork" },
+      { name: "description", content: "Your saved high-protein recipes from Fridge To Fork." },
+      { property: "og:title", content: "My Favorites — Fridge To Fork" },
+      { property: "og:description", content: "Your saved high-protein recipes from Fridge To Fork." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

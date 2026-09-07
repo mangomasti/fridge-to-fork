@@ -12,9 +12,9 @@ import { RotateCcw } from "lucide-react";
 export const Route = createFileRoute("/fridge")({
   head: () => ({
     meta: [
-      { title: "What's In My Fridge — Fuel Kitchen" },
+      { title: "What's In My Fridge — Fridge To Fork" },
       { name: "description", content: "Pick the ingredients you have and find high-protein recipes you can make right now." },
-      { property: "og:title", content: "What's In My Fridge — Fuel Kitchen" },
+      { property: "og:title", content: "What's In My Fridge — Fridge To Fork" },
       { property: "og:description", content: "Pick the ingredients you have and find high-protein recipes you can make right now." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

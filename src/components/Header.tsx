@@ -23,7 +23,7 @@ export function Header() {
             <ChefHat className="h-5 w-5" />
           </span>
           <span className="font-display text-xl tracking-tight text-foreground">
-            Fuel Kitchen
+            Fridge To Fork
           </span>
         </Link>
 

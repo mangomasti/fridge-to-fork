@@ -9,9 +9,9 @@ import { collections, collectionLabels } from "@/data/recipes";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fuel Kitchen — High-Protein Recipes for Gym Lovers" },
+      { title: "Fridge To Fork — High-Protein Recipes for Gym Lovers" },
       { name: "description", content: "Build high-protein meals from what's in your fridge. Browse macro-friendly recipes, save favorites, and plan your week." },
-      { property: "og:title", content: "Fuel Kitchen — High-Protein Recipes for Gym Lovers" },
+      { property: "og:title", content: "Fridge To Fork — High-Protein Recipes for Gym Lovers" },
       { property: "og:description", content: "Build high-protein meals from what's in your fridge. Browse macro-friendly recipes, save favorites, and plan your week." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

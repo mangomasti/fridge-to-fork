@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Fuel Kitchen — High-Protein Recipes for Gym Lovers" },
+      { title: "Fridge To Fork — High-Protein Recipes for Gym Lovers" },
       { name: "description", content: "Build high-protein meals from what's in your fridge. Browse macro-friendly recipes, save favorites, and plan your week." },
-      { name: "author", content: "Fuel Kitchen" },
-      { property: "og:title", content: "Fuel Kitchen — High-Protein Recipes for Gym Lovers" },
+      { name: "author", content: "Fridge To Fork" },
+      { property: "og:title", content: "Fridge To Fork — High-Protein Recipes for Gym Lovers" },
       { property: "og:description", content: "Build high-protein meals from what's in your fridge. Browse macro-friendly recipes, save favorites, and plan your week." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -134,9 +134,9 @@ function RootComponent() {
         </main>
         <footer className="border-t border-border bg-background py-8">
           <div className="mx-auto max-w-7xl px-4 text-center text-sm text-muted-foreground sm:px-6 lg:px-8">
-            <p className="font-display text-lg text-foreground">Fuel Kitchen</p>
+            <p className="font-display text-lg text-foreground">Fridge To Fork</p>
             <p className="mt-2">High-protein recipes built for real kitchens and real macros.</p>
-            <p className="mt-4">© {new Date().getFullYear()} Fuel Kitchen. All rights reserved.</p>
+            <p className="mt-4">© {new Date().getFullYear()} Fridge To Fork. All rights reserved.</p>
           </div>
         </footer>
       </div>
