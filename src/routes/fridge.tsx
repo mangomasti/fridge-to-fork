@@ -68,7 +68,7 @@ function FridgePage() {
           onChange={setSelected}
         />
 
-        {selected.length > 0 && <SurpriseMe selected={selected} />}
+        {selected.length > 0 && <SurpriseMe selected={selected} onAddIngredient={addIngredient} />}
 
         {selected.length > 0 && (
           <div className="mt-10">
@@ -88,6 +88,7 @@ function FridgePage() {
                     onToggleFavorite={toggle}
                     matchRatio={matchRatio}
                     missingIngredients={missingIngredients}
+                    onAddIngredient={addIngredient}
                   />
                 ))}
               </div>
@@ -108,6 +109,7 @@ function FridgePage() {
                       onToggleFavorite={toggle}
                       matchRatio={matchRatio}
                       missingIngredients={missingIngredients}
+                      onAddIngredient={addIngredient}
                     />
                   ))}
                 </div>
