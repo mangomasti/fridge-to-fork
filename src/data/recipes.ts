@@ -1687,6 +1687,12 @@ export const ingredientCatalog = {
     "Thai basil",
     "lettuce cups",
     "celery",
+    "mushrooms",
+    "dill",
+    "mint",
+    "chives",
+    "jalapeño",
+    "green chili",
   ],
   pantry: [
     "basmati rice",
