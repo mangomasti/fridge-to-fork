@@ -1647,6 +1647,8 @@ export const ingredientCatalog = {
     "feta cheese",
     "cotija cheese",
     "paneer",
+    "buttermilk",
+    "cream cheese",
   ],
   plantProtein: [
     "tofu",
@@ -1766,6 +1768,9 @@ export const ingredientCatalog = {
     "cajun seasoning",
     "dried chili",
     "chipotle peppers",
+    "chili flakes",
+    "nutmeg",
+    "star anise",
   ],
 };
 
