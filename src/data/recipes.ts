@@ -1647,6 +1647,8 @@ export const ingredientCatalog = {
     "feta cheese",
     "cotija cheese",
     "paneer",
+    "buttermilk",
+    "cream cheese",
   ],
   plantProtein: [
     "tofu",
@@ -1687,6 +1689,12 @@ export const ingredientCatalog = {
     "Thai basil",
     "lettuce cups",
     "celery",
+    "mushrooms",
+    "dill",
+    "mint",
+    "chives",
+    "jalapeño",
+    "green chili",
   ],
   pantry: [
     "basmati rice",
@@ -1727,6 +1735,14 @@ export const ingredientCatalog = {
     "tahini",
     "white miso",
     "nori",
+    "peanut butter",
+    "coconut milk",
+    "flour",
+    "mustard",
+    "vinegar",
+    "red wine vinegar",
+    "vegetable oil",
+    "pine nuts",
   ],
   spices: [
     "cumin",
@@ -1752,6 +1768,9 @@ export const ingredientCatalog = {
     "cajun seasoning",
     "dried chili",
     "chipotle peppers",
+    "chili flakes",
+    "nutmeg",
+    "star anise",
   ],
 };
 

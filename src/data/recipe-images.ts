@@ -1,3 +1,15 @@
+import imgTzatziki from "@/assets/recipes/tzatziki.jpg";
+import imgHummus from "@/assets/recipes/hummus.jpg";
+import imgRanchDressing from "@/assets/recipes/ranch-dressing.jpg";
+import imgPeanutSatimg from "@/assets/recipes/peanut-satay-sauce.jpg";
+import imgBechamel from "@/assets/recipes/bechamel-sauce.jpg";
+import imgCheeseSauce from "@/assets/recipes/cheese-sauce.jpg";
+import imgMushroomCream from "@/assets/recipes/mushroom-cream-pan-sauce.jpg";
+import imgCurryBase from "@/assets/recipes/curry-base-masala.jpg";
+import imgPesto from "@/assets/recipes/pesto.jpg";
+import imgGreenChutney from "@/assets/recipes/green-chutney.jpg";
+import imgPicoDeGallo from "@/assets/recipes/pico-de-gallo.jpg";
+import imgChiliCrisp from "@/assets/recipes/chili-garlic-crisp-oil.jpg";
 import imgBbqPulledChicken from "@/assets/recipes/bbq-pulled-chicken.jpg";
 import imgBeefAndBroccoli from "@/assets/recipes/beef-and-broccoli.jpg";
 import imgBlackenedTilapia from "@/assets/recipes/blackened-tilapia.jpg";
@@ -158,4 +170,16 @@ export const recipeImages: Record<string, string> = {
   "turkey-meatballs-marinara": imgTurkeyMeatballsMarinara,
   "vegan-burrito-bowl": imgVeganBurritoBowl,
   "vegetable-paella": imgVegetablePaella,
+  "tzatziki": imgTzatziki,
+  "hummus": imgHummus,
+  "ranch-dressing": imgRanchDressing,
+  "peanut-satay-sauce": imgPeanutSatimg,
+  "bechamel-sauce": imgBechamel,
+  "cheese-sauce": imgCheeseSauce,
+  "mushroom-cream-pan-sauce": imgMushroomCream,
+  "curry-base-masala": imgCurryBase,
+  "pesto": imgPesto,
+  "green-chutney": imgGreenChutney,
+  "pico-de-gallo": imgPicoDeGallo,
+  "chili-garlic-crisp-oil": imgChiliCrisp,
 };
